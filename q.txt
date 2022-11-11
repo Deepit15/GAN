@@ -43,7 +43,7 @@ tensorboard-data-server
 tensorboard-plugin-wit
 
 torchmetrics
-
+torchvision
 tqdm
 typing-extensions
 urllib3
