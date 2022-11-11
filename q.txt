@@ -41,7 +41,7 @@ six
 tensorboard
 tensorboard-data-server
 tensorboard-plugin-wit
-pytorch
+
 torchmetrics
 torchvision
 tqdm
