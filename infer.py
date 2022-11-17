@@ -1,3 +1,4 @@
+
 import os
 import random
 from argparse import ArgumentParser
@@ -11,7 +12,7 @@ from gan_module import Generator
 
 parser = ArgumentParser()
 parser.add_argument(
-    '--image_dir', default='/Downloads/CACD_VS/', help='The image directory')
+    '--image_dir', default='/image/', help='The image directory')
 
 
 @torch.no_grad()
