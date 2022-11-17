@@ -12,7 +12,7 @@ from gan_module import Generator
 
 parser = ArgumentParser()
 parser.add_argument(
-    '--image_dir', default='/image/', help='The image directory')
+    '--image_dir', default='image/', help='The image directory')
 
 
 @torch.no_grad()
