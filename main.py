@@ -1,5 +1,6 @@
 from argparse import ArgumentParser
 
+import torch
 import yaml
 from pytorch_lightning import Trainer
 
@@ -17,6 +18,7 @@ def main():
     model = AgingGAN(config)
     trainer = Trainer(max_epochs=config['epochs'], accelerator="gpu",gpus=1, auto_scale_batch_size='binsearch')
     trainer.fit(model)
+    torch.save(trainer,'try.pth')
 
 
 if __name__ == '__main__':
