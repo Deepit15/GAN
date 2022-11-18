@@ -18,7 +18,7 @@ def main():
     model = AgingGAN(config)
     trainer = Trainer(max_epochs=config['epochs'], accelerator="gpu",devices=1, auto_scale_batch_size='binsearch')
     trainer.fit(model)
-    # torch.save(net.module.cpu().state_dict(), 'pretrained_model/state_dict.pth')
+    torch.save(model.state_dict(), 'pretrained_model/state_dict.pth')
     # torch.save(gen.state_dict(),'pretrained_model/state_dict.pth')
     # torch.save(gen.state_dict(),'pretrained_model/state_dict.pth')
 
