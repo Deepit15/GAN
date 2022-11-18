@@ -30,19 +30,17 @@ def main():
         transforms.Normalize(mean=(0.5, 0.5, 0.5), std=(0.5, 0.5, 0.5))
     ])
     nr_images = len(image_paths) if len(image_paths) < 6 else 6
-    j=0
+    fig, ax = plt.subplots(2, nr_images, figsize=(20, 10))
     random.shuffle(image_paths)
     for i in range(nr_images):
-        fig, ax = plt.subplots(0, i, figsize=(20, 10))
         img = Image.open(image_paths[i]).convert('RGB')
         img = trans(img).unsqueeze(0)
         aged_face = model(img)
         aged_face = (aged_face.squeeze().permute(1, 2, 0).numpy() + 1.0) / 2.0
         ax[0, i].imshow((img.squeeze().permute(1, 2, 0).numpy() + 1.0) / 2.0)
         ax[1, i].imshow(aged_face)
-        # plt.show()
-        j+=1
-        plt.savefig("mygraph"+str(j)+".png")
+    # plt.show()
+    plt.savefig("mygraph.png")
 
 
 if __name__ == '__main__':
