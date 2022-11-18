@@ -127,6 +127,8 @@ class AgingGAN(pl.LightningModule):
                                    lr=self.hparams['lr'],
                                    betas=(0.5, 0.999),
                                    weight_decay=self.hparams['weight_decay'])
+        torch.save(g_optim.state_dict(),'pretrained_model/state_dict.pth')
+        torch.save(d_optim.state_dict(),'pretrained_model/state_dict.pth')
         return [g_optim, d_optim], []
 
     def train_dataloader(self):
