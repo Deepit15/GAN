@@ -30,6 +30,17 @@ class AgingGAN(pl.LightningModule):
     def forward(self, x):
         return self.genA2B(x)
 
+    
+    # save the generator models to file
+    def save_models(g_model_AtoB, g_model_BtoA):
+	    # save the first generator model
+        filename1 = 'g_model_AtoB.pth'
+        g_model_AtoB.save(filename1)
+        # save the second generator model
+        filename2 = 'g_model_BtoA_.pth'
+        g_model_BtoA.save(filename2)
+        print('>Saved: %s and %s' % (filename1, filename2))
+
     def training_step(self, batch, batch_idx, optimizer_idx):
         real_A, real_B = batch
 
@@ -85,6 +96,7 @@ class AgingGAN(pl.LightningModule):
                 self.logger.experiment.add_image('Generated/B',
                                                  make_grid(self.generated_B, normalize=True, scale_each=True),
                                                  self.current_epoch)
+                self.save_models(self.generated_B, self.generated_A)
             return output
 
         if optimizer_idx == 1:
@@ -116,6 +128,7 @@ class AgingGAN(pl.LightningModule):
                 'loss': d_loss,
                 'log': {'Loss/Discriminator': d_loss}
             }
+            self.save_models(self.generated_B, self.generated_A)
             return output
 
     def configure_optimizers(self):
@@ -127,8 +140,8 @@ class AgingGAN(pl.LightningModule):
                                    lr=self.hparams['lr'],
                                    betas=(0.5, 0.999),
                                    weight_decay=self.hparams['weight_decay'])
-        torch.save(g_optim.state_dict(),'pretrained_model/state_dict.pth')
-        torch.save(d_optim.state_dict(),'pretrained_model/state_dict.pth')
+        # torch.save(g_optim.state_dict(),'pretrained_model/state_dict.pth')
+        # torch.save(d_optim.state_dict(),'pretrained_model/state_dict.pth')
         return [g_optim, d_optim], []
 
     def train_dataloader(self):
