@@ -35,10 +35,10 @@ class AgingGAN(pl.LightningModule):
     def save_models(g_model_AtoB, g_model_BtoA):
 	    # save the first generator model
         filename1 = 'g_model_AtoB.pth'
-        torch.save(g_model_AtoB,filename1)
+        torch.save(g_model_AtoB.state_dict(),filename1)
         # save the second generator model
         filename2 = 'g_model_BtoA_.pth'
-        torch.save(g_model_BtoA,filename2)
+        torch.save(g_model_BtoA.state_dict(),filename2)
         print('>Saved: %s and %s' % (filename1, filename2))
 
     def training_step(self, batch, batch_idx, optimizer_idx):
