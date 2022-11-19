@@ -21,7 +21,7 @@ def main():
     image_paths = [os.path.join(args.image_dir, x) for x in os.listdir(args.image_dir) if
                    x.endswith('.png') or x.endswith('.jpg')]
     model = Generator(ngf=32, n_residual_blocks=9)
-    ckpt = torch.load('pretrained_model/state_dict.ckpt', map_location='cpu')
+    ckpt = torch.load('g_model_AtoB.pth', map_location='cpu')
     model.load_state_dict(ckpt, strict=False)
     model.eval()
     trans = transforms.Compose([
