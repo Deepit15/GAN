@@ -96,7 +96,7 @@ class AgingGAN(pl.LightningModule):
                 self.logger.experiment.add_image('Generated/B',
                                                  make_grid(self.generated_B, normalize=True, scale_each=True),
                                                  self.current_epoch)
-                self.save_models(self.generated_B, self.generated_A)
+                AgingGAN.save_models(self.generated_B, self.generated_A)
             return output
 
         if optimizer_idx == 1:
@@ -128,7 +128,7 @@ class AgingGAN(pl.LightningModule):
                 'loss': d_loss,
                 'log': {'Loss/Discriminator': d_loss}
             }
-            self.save_models(self.generated_B, self.generated_A)
+            AgingGAN.save_models(self.generated_B, self.generated_A)
             return output
 
     def configure_optimizers(self):
