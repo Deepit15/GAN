@@ -1,4 +1,3 @@
-
 import os
 import random
 from argparse import ArgumentParser
@@ -21,8 +20,8 @@ def main():
     image_paths = [os.path.join(args.image_dir, x) for x in os.listdir(args.image_dir) if
                    x.endswith('.png') or x.endswith('.jpg')]
     model = Generator(ngf=32, n_residual_blocks=9)
-    ckpt = torch.load('g_model_AtoB.pth', map_location='cpu')
-    model.load_state_dict(ckpt, strict=False)
+    ckpt = torch.load('pretrained_model/latest_net_G.pth', map_location='cpu')
+    model.load_state_dict(ckpt)
     model.eval()
     trans = transforms.Compose([
         transforms.Resize((512, 512)),
